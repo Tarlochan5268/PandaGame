@@ -425,8 +425,18 @@ livesLabel.text = "Lives: \(lives)"
       run(catCollisionSound)
     }
     
+    func spawnPanda() {
+      panda.position = CGPoint(x: 100, y: playableRect.minY + 30)
+      panda.zPosition = 100
+      addChild(panda)
+      panda.run(SKAction.repeatForever(pandaAnimation))
+      panda.run(SKAction.repeatForever(pandaMove))
+    }
+    
     func pandaHit(enemy: SKSpriteNode) {
-      invincible = true
+      panda.removeFromParent()
+        spawnPanda()
+        invincible = true
       let blinkTimes = 10.0
       let duration = 3.0
       let blinkAction = SKAction.customAction(withDuration: duration) { node, elapsedTime in
@@ -439,6 +449,8 @@ livesLabel.text = "Lives: \(lives)"
         self?.panda.isHidden = false
         self?.invincible = false
       }
+        
+        
       panda.run(SKAction.sequence([blinkAction, setHidden]))
       
       run(enemyCollisionSound)

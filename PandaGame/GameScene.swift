@@ -43,7 +43,14 @@ class GameScene: SKScene {
  
   
   
-  
+  func spawnPanda() {
+    panda.position = CGPoint(x: 100, y: playableRect.minY + 30)
+    panda.zPosition = 100
+    addChild(panda)
+    panda.run(SKAction.repeatForever(pandaAnimation))
+    panda.run(SKAction.repeatForever(pandaMove))
+  }
+    
   override func update(_ currentTime: TimeInterval) {
   
     if lastUpdateTime > 0 {
@@ -278,6 +285,7 @@ livesLabel.text = "Lives: \(lives)"
       }
     }
     
+    
     override func didMove(to view: SKView) {
 
       playBackgroundMusic(filename: "BgSound.wav")
@@ -289,21 +297,7 @@ livesLabel.text = "Lives: \(lives)"
         background.zPosition = -1
         addChild(background)
       
-        panda.position = CGPoint(x: 100, y: playableRect.minY + 30)
-      panda.zPosition = 100
-      addChild(panda)
-        /*
-        if(panda.position.x <= playableRect.minX - 20)
-        {
-            panda.run(SKAction.repeatForever(pandaMove))
-        }
-        else
-        {
-            panda.run(SKAction.repeatForever(pandaMoveback))
-        }
- */
-        panda.run(SKAction.repeatForever(pandaAnimation))
-        panda.run(SKAction.repeatForever(pandaMove))
+        spawnPanda()
       // panda.run(SKAction.repeatForever(pandaAnimation))
       
       run(SKAction.repeatForever(SKAction.sequence([SKAction.run() { [weak self] in
@@ -419,6 +413,33 @@ livesLabel.text = "Lives: \(lives)"
     }
     
     func pandaHit(enemy: SKSpriteNode) {
+      panda.removeFromParent()
+        spawnPanda()
+        invincible = true
+      let blinkTimes = 10.0
+      let duration = 3.0
+      let blinkAction = SKAction.customAction(withDuration: duration) { node, elapsedTime in
+        let slice = duration / blinkTimes
+        let remainder = Double(elapsedTime).truncatingRemainder(
+          dividingBy: slice)
+        node.isHidden = remainder > slice / 2
+      }
+      let setHidden = SKAction.run() { [weak self] in
+        self?.panda.isHidden = false
+        self?.invincible = false
+      }
+        
+        
+      panda.run(SKAction.sequence([blinkAction, setHidden]))
+      
+      run(enemyCollisionSound)
+      
+      loseCats()
+      lives -= 1
+    }
+    
+    //debug duplicate function
+    func pandaHit2(enemy: SKSpriteNode) {
       invincible = true
       let blinkTimes = 10.0
       let duration = 3.0
@@ -432,6 +453,8 @@ livesLabel.text = "Lives: \(lives)"
         self?.panda.isHidden = false
         self?.invincible = false
       }
+        //panda.removeFromParent()
+        
       panda.run(SKAction.sequence([blinkAction, setHidden]))
       
       run(enemyCollisionSound)
@@ -439,6 +462,7 @@ livesLabel.text = "Lives: \(lives)"
       loseCats()
       lives -= 1
     }
+    
     
     func checkCollisions() {
       var hitCats: [SKSpriteNode] = []
