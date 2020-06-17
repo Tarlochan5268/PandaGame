@@ -26,12 +26,12 @@ class GameScene: SKScene {
   let pandaAnimation: SKAction
     let pandaMove: SKAction
     let pandaMoveback: SKAction
-  let catCollisionSound: SKAction = SKAction.playSoundFileNamed(
+  let coinCollisionSound: SKAction = SKAction.playSoundFileNamed(
     "Mario-coin-sound.mp3", waitForCompletion: false)
   let enemyCollisionSound: SKAction = SKAction.playSoundFileNamed(
     "hitCatLady.wav", waitForCompletion: false)
   var invincible = false
-  let catMovePointsPerSec:CGFloat = 480.0
+  let coinMovePointsPerSec:CGFloat = 480.0
   var lives = 3
   var gameOver = false
   let cameraNode = SKCameraNode()
@@ -103,7 +103,7 @@ livesLabel.text = "Lives: \(lives)"
         let actionDuration = 0.3
         let offset = targetPosition - node.position
         let direction = offset.normalized()
-        let amountToMovePerSec = direction * self.catMovePointsPerSec
+        let amountToMovePerSec = direction * self.coinMovePointsPerSec
         let amountToMove = amountToMovePerSec * CGFloat(actionDuration)
         let moveAction = SKAction.moveBy(x: amountToMove.x, y: amountToMove.y, duration: actionDuration)
         node.run(moveAction)
@@ -111,7 +111,7 @@ livesLabel.text = "Lives: \(lives)"
       targetPosition = node.position
     }
     
-    if trainCount >= 2 && !gameOver && exitFlag {
+    if coinCollected >= 2 && !gameOver && exitFlag {
         let gameScene2 = GameScene2(size:CGSize(width: 2048, height: 1536))
       gameScene2.scaleMode = scaleMode
       // 2
@@ -122,7 +122,7 @@ livesLabel.text = "Lives: \(lives)"
     
   }
   
-  func loseCats() {
+  func loseCoins() {
     // 1
     var loseCount = 0
     enumerateChildNodes(withName: "train") { node, stop in
@@ -167,21 +167,21 @@ livesLabel.text = "Lives: \(lives)"
       enemy.run(SKAction.sequence([actionMove, actionRemove]))
     }
     
-    func spawnCat() {
+    func spawnCoin() {
       // 1
-      let cat = SKSpriteNode(imageNamed: "coin2")
-      cat.name = "cat"
-      cat.position = CGPoint(
+      let coin = SKSpriteNode(imageNamed: "coin2")
+      coin.name = "coin"
+      coin.position = CGPoint(
         x: playableRect.minX + 700,
         y: playableRect.minY + 100)
-      cat.zPosition = 50
-      cat.setScale(0)
-      addChild(cat)
+      coin.zPosition = 50
+      coin.setScale(0)
+      addChild(coin)
       // 2
       let appear = SKAction.scale(to: 1.0, duration: 0.5)
 
       let actions = [appear]
-      cat.run(SKAction.sequence(actions))
+      coin.run(SKAction.sequence(actions))
     }
     func spawnExit() {
       // 1
@@ -200,21 +200,21 @@ livesLabel.text = "Lives: \(lives)"
       exit.run(SKAction.sequence(actions))
     }
     
-    func spawnCat2() {
+    func spawnCoin2() {
       // 1
-      let cat = SKSpriteNode(imageNamed: "coin2")
-      cat.name = "cat"
-      cat.position = CGPoint(
+      let coin = SKSpriteNode(imageNamed: "coin2")
+      coin.name = "coin"
+      coin.position = CGPoint(
         x: playableRect.minX + 1300,
         y: playableRect.minY + 100)
-      cat.zPosition = 50
-      cat.setScale(0)
-      addChild(cat)
+      coin.zPosition = 50
+      coin.setScale(0)
+      addChild(coin)
       // 2
       let appear = SKAction.scale(to: 1.0, duration: 0.5)
 
       let actions = [appear]
-      cat.run(SKAction.sequence(actions))
+      coin.run(SKAction.sequence(actions))
     }
     
     func move(sprite: SKSpriteNode, velocity: CGPoint) {
@@ -304,8 +304,8 @@ livesLabel.text = "Lives: \(lives)"
                         self?.spawnEnemy()
                       },SKAction.wait(forDuration: 3.0)])))
 
-      spawnCat()
-        spawnCat2()
+      spawnCoin()
+        spawnCoin2()
         if(coinCollected >= 2)
         {
             spawnExit()
@@ -386,17 +386,17 @@ livesLabel.text = "Lives: \(lives)"
       fatalError("init(coder:) has not been implemented")
     }
     
-    func pandaHit(cat: SKSpriteNode) {
-      cat.name = "train"
-      cat.removeAllActions()
-      cat.setScale(1.0)
-      cat.zRotation = 0
+    func pandaHit(coin: SKSpriteNode) {
+      coin.name = "train"
+      coin.removeAllActions()
+      coin.setScale(1.0)
+      coin.zRotation = 0
       
       let turnGreen = SKAction.colorize(with: SKColor.green, colorBlendFactor: 1.0, duration: 0.2)
-      cat.run(turnGreen)
-        cat.isHidden = true
+      coin.run(turnGreen)
+        coin.isHidden = true
       coinCollected+=1
-      run(catCollisionSound)
+      run(coinCollisionSound)
     }
     
     func pandaHit(exit: SKSpriteNode) {
@@ -409,7 +409,7 @@ livesLabel.text = "Lives: \(lives)"
       exit.run(turnGreen)
         exit.isHidden = true
       exitFlag = true
-      run(catCollisionSound)
+      run(coinCollisionSound)
     }
     
     func pandaHit(enemy: SKSpriteNode) {
@@ -434,7 +434,7 @@ livesLabel.text = "Lives: \(lives)"
       
       run(enemyCollisionSound)
       
-      loseCats()
+      loseCoins()
       lives -= 1
     }
     
@@ -459,22 +459,22 @@ livesLabel.text = "Lives: \(lives)"
       
       run(enemyCollisionSound)
       
-      loseCats()
+      loseCoins()
       lives -= 1
     }
     
     
     func checkCollisions() {
-      var hitCats: [SKSpriteNode] = []
-      enumerateChildNodes(withName: "cat") { node, _ in
-        let cat = node as! SKSpriteNode
-        if cat.frame.intersects(self.panda.frame) {
-          hitCats.append(cat)
+      var hitCoins: [SKSpriteNode] = []
+      enumerateChildNodes(withName: "coin") { node, _ in
+        let coin = node as! SKSpriteNode
+        if coin.frame.intersects(self.panda.frame) {
+          hitCoins.append(coin)
         }
       }
       
-      for cat in hitCats {
-        pandaHit(cat: cat)
+      for coin in hitCoins {
+        pandaHit(coin: coin)
       }
       
       if invincible {
