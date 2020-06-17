@@ -215,6 +215,22 @@ livesLabel.text = "Lives: \(lives)"
       let actions = [appear]
       platform.run(SKAction.sequence(actions))
     }
+    func spawnPlatform2() {
+      // 1
+      let platform = SKSpriteNode(imageNamed: "platform")
+      platform.name = "exit"
+      platform.position = CGPoint(
+        x: playableRect.minX + 1500,
+        y: playableRect.minY + 100)
+      platform.zPosition = 50
+      platform.setScale(0)
+      addChild(platform)
+      // 2
+      let appear = SKAction.scale(to: 1.0, duration: 0.5)
+
+      let actions = [appear]
+      platform.run(SKAction.sequence(actions))
+    }
     
     func spawnCoin2() {
       // 1
@@ -338,6 +354,7 @@ livesLabel.text = "Lives: \(lives)"
       spawnCoin()
         spawnCoin2()
         spawnPlatform()
+        spawnPlatform2()
       
       // debugDrawPlayableArea()
       
