@@ -24,6 +24,7 @@
 		8424EABB2499784C00F5C987 /* MyUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8424EABA2499784C00F5C987 /* MyUtils.swift */; };
 		8424EABD2499787B00F5C987 /* GameOverScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8424EABC2499787B00F5C987 /* GameOverScene.swift */; };
 		84B8D65A24999C7F00B6C5FC /* GameScene2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B8D65924999C7F00B6C5FC /* GameScene2.swift */; };
+		84B8D65C2499BBE400B6C5FC /* hitCatLady.wav in Resources */ = {isa = PBXBuildFile; fileRef = 84B8D65B2499BBE400B6C5FC /* hitCatLady.wav */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -46,6 +47,7 @@
 		8424EABA2499784C00F5C987 /* MyUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyUtils.swift; sourceTree = "<group>"; };
 		8424EABC2499787B00F5C987 /* GameOverScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameOverScene.swift; sourceTree = "<group>"; };
 		84B8D65924999C7F00B6C5FC /* GameScene2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScene2.swift; sourceTree = "<group>"; };
+		84B8D65B2499BBE400B6C5FC /* hitCatLady.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = hitCatLady.wav; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,6 +105,7 @@
 				8424EAB0249977C900F5C987 /* lose.wav */,
 				8424EAB1249977C900F5C987 /* jumpSound.wav */,
 				8424EAB2249977C900F5C987 /* loselifeSound.wav */,
+				84B8D65B2499BBE400B6C5FC /* hitCatLady.wav */,
 				8424EAB3249977C900F5C987 /* BgSound.wav */,
 			);
 			path = Sounds;
@@ -175,6 +178,7 @@
 				8424EAA6249976FD00F5C987 /* LaunchScreen.storyboard in Resources */,
 				8424EAB8249977C900F5C987 /* loselifeSound.wav in Resources */,
 				8424EA9A249976FC00F5C987 /* Actions.sks in Resources */,
+				84B8D65C2499BBE400B6C5FC /* hitCatLady.wav in Resources */,
 				8424EAB6249977C900F5C987 /* lose.wav in Resources */,
 				8424EAB9249977C900F5C987 /* BgSound.wav in Resources */,
 			);
