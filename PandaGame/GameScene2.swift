@@ -1,15 +1,19 @@
 //
-//  GameScene.swift
+//  GameScene2.swift
 //  PandaGame
 //
 //  Created by Das Tarlochan Preet Singh on 2020-06-16.
 //  Copyright © 2020 Tarlochan5268. All rights reserved.
 //
+//
+//  GameScene.swift
+//  PandaGame
+//
 
 import SpriteKit
 import GameplayKit
 
-class GameScene: SKScene {
+class GameScene2: SKScene {
   
   let panda = SKSpriteNode(imageNamed: "panda")
   var lastUpdateTime: TimeInterval = 0
@@ -36,7 +40,7 @@ class GameScene: SKScene {
   var gameOver = false
   let cameraNode = SKCameraNode()
   let cameraMovePointsPerSec: CGFloat = 200.0
-    var exitFlag = false;
+    var exit = false;
 
   
   
@@ -60,12 +64,9 @@ class GameScene: SKScene {
 
 livesLabel.text = "Lives: \(lives)"
     scoresLabel.text = "Coins: \(coinCollected)"
-    levelLabel.text = "Level: 1"
+    levelLabel.text = "Level: 2"
     //moveCamera()
-    if(coinCollected >= 2)
-    {
-        spawnExit()
-    }
+    
     if lives <= 0 && !gameOver {
       gameOver = true
       print("You lose!")
@@ -104,13 +105,18 @@ livesLabel.text = "Lives: \(lives)"
       targetPosition = node.position
     }
     
-    if trainCount >= 2 && !gameOver && exitFlag {
-        let gameScene2 = GameScene2(size:CGSize(width: 2048, height: 1536))
-      gameScene2.scaleMode = scaleMode
+    if trainCount >= 2 && !gameOver {
+      gameOver = true
+      print("You win!")
+      backgroundMusicPlayer.stop()
+      
+      // 1
+        let gameOverScene = GameOverScene(size: size, won: true, score: coinCollected)
+      gameOverScene.scaleMode = scaleMode
       // 2
       let reveal = SKTransition.flipHorizontal(withDuration: 0.5)
       // 3
-      view?.presentScene(gameScene2, transition: reveal)
+      view?.presentScene(gameOverScene, transition: reveal)
     }
     
   }
@@ -181,7 +187,7 @@ livesLabel.text = "Lives: \(lives)"
       let exit = SKSpriteNode(imageNamed: "exit")
       exit.name = "exit"
       exit.position = CGPoint(
-        x: playableRect.maxX-100,
+        x: playableRect.maxX - 150,
         y: playableRect.minY + 100)
       exit.zPosition = 50
       exit.setScale(0)
@@ -191,6 +197,23 @@ livesLabel.text = "Lives: \(lives)"
 
       let actions = [appear]
       exit.run(SKAction.sequence(actions))
+    }
+    
+    func spawnPlatform() {
+      // 1
+      let platform = SKSpriteNode(imageNamed: "platform")
+      platform.name = "exit"
+      platform.position = CGPoint(
+        x: playableRect.minX + 1000,
+        y: playableRect.minY + 100)
+      platform.zPosition = 50
+      platform.setScale(0)
+      addChild(platform)
+      // 2
+      let appear = SKAction.scale(to: 1.0, duration: 0.5)
+
+      let actions = [appear]
+      platform.run(SKAction.sequence(actions))
     }
     
     func spawnCat2() {
@@ -289,7 +312,7 @@ livesLabel.text = "Lives: \(lives)"
         background.zPosition = -1
         addChild(background)
       
-        panda.position = CGPoint(x: 100, y: playableRect.minY + 30)
+        panda.position = CGPoint(x: 200, y: playableRect.minY + 30)
       panda.zPosition = 100
       addChild(panda)
         /*
@@ -312,10 +335,7 @@ livesLabel.text = "Lives: \(lives)"
 
       spawnCat()
         spawnCat2()
-        if(coinCollected >= 2)
-        {
-            spawnExit()
-        }
+        spawnPlatform()
       
       // debugDrawPlayableArea()
       
@@ -405,19 +425,6 @@ livesLabel.text = "Lives: \(lives)"
       run(catCollisionSound)
     }
     
-    func pandaHit(exit: SKSpriteNode) {
-      exit.name = "exit"
-      exit.removeAllActions()
-      exit.setScale(1.0)
-      exit.zRotation = 0
-      
-      let turnGreen = SKAction.colorize(with: SKColor.green, colorBlendFactor: 1.0, duration: 0.2)
-      exit.run(turnGreen)
-        exit.isHidden = true
-      exitFlag = true
-      run(catCollisionSound)
-    }
-    
     func pandaHit(enemy: SKSpriteNode) {
       invincible = true
       let blinkTimes = 10.0
@@ -468,19 +475,6 @@ livesLabel.text = "Lives: \(lives)"
       for enemy in hitEnemies {
         pandaHit(enemy: enemy)
       }
-        
-        
-        var hitExit: [SKSpriteNode] = []
-        enumerateChildNodes(withName: "exit") { node, _ in
-          let exit = node as! SKSpriteNode
-          if node.frame.insetBy(dx: 10, dy: 10).intersects(
-            self.panda.frame) {
-            hitExit.append(exit)
-          }
-        }
-        for exit in hitExit {
-          pandaHit(exit: exit)
-        }
     }
     
     override func didEvaluateActions() {

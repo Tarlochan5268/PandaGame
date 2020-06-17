@@ -26,11 +26,11 @@ init(size: CGSize, won: Bool, score: Int) {
     override func didMove(to view: SKView) {
     var background: SKSpriteNode
     if (won) {
-    background = SKSpriteNode(imageNamed: "bakground")
+    background = SKSpriteNode(imageNamed: "winbackground")
     run(SKAction.playSoundFileNamed("win.wav",
     waitForCompletion: false))
     } else {
-        background = SKSpriteNode(imageNamed: "bakground")
+        background = SKSpriteNode(imageNamed: "lose")
         run(SKAction.playSoundFileNamed("lose.wav",
         waitForCompletion: false))
         }
@@ -40,7 +40,7 @@ init(size: CGSize, won: Bool, score: Int) {
         self.addChild(background)
 
         // More here...
-        let wait = SKAction.wait(forDuration: 3.0)
+        let wait = SKAction.wait(forDuration: 8)
         let block = SKAction.run {
          let myScene = GameScene(size: self.size)
          myScene.scaleMode = self.scaleMode
@@ -51,10 +51,6 @@ init(size: CGSize, won: Bool, score: Int) {
         if(won)
         {
             scoresLabel.text = "You Won the Game \n Coins Collected : \(score)"
-        }
-        else
-        {
-            scoresLabel.text = "You Lost the Game \n Coins Collected : \(score)"
         }
         
         scoresLabel.fontColor = SKColor.red

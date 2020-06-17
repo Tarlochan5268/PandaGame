@@ -23,6 +23,7 @@
 		8424EAB9249977C900F5C987 /* BgSound.wav in Resources */ = {isa = PBXBuildFile; fileRef = 8424EAB3249977C900F5C987 /* BgSound.wav */; };
 		8424EABB2499784C00F5C987 /* MyUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8424EABA2499784C00F5C987 /* MyUtils.swift */; };
 		8424EABD2499787B00F5C987 /* GameOverScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8424EABC2499787B00F5C987 /* GameOverScene.swift */; };
+		84B8D65A24999C7F00B6C5FC /* GameScene2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B8D65924999C7F00B6C5FC /* GameScene2.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -44,6 +45,7 @@
 		8424EAB3249977C900F5C987 /* BgSound.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = BgSound.wav; sourceTree = "<group>"; };
 		8424EABA2499784C00F5C987 /* MyUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyUtils.swift; sourceTree = "<group>"; };
 		8424EABC2499787B00F5C987 /* GameOverScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameOverScene.swift; sourceTree = "<group>"; };
+		84B8D65924999C7F00B6C5FC /* GameScene2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScene2.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -88,6 +90,7 @@
 				8424EAA7249976FD00F5C987 /* Info.plist */,
 				8424EABA2499784C00F5C987 /* MyUtils.swift */,
 				8424EABC2499787B00F5C987 /* GameOverScene.swift */,
+				84B8D65924999C7F00B6C5FC /* GameScene2.swift */,
 			);
 			path = PandaGame;
 			sourceTree = "<group>";
@@ -187,6 +190,7 @@
 				8424EABD2499787B00F5C987 /* GameOverScene.swift in Sources */,
 				8424EA9C249976FC00F5C987 /* GameScene.swift in Sources */,
 				8424EA9E249976FC00F5C987 /* GameViewController.swift in Sources */,
+				84B8D65A24999C7F00B6C5FC /* GameScene2.swift in Sources */,
 				8424EA96249976FC00F5C987 /* AppDelegate.swift in Sources */,
 				8424EABB2499784C00F5C987 /* MyUtils.swift in Sources */,
 			);
