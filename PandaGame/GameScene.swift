@@ -261,10 +261,12 @@ livesLabel.text = "Lives: \(lives)"
       let midRight = CGPoint(x: playableRect.maxX-50, y: playableRect.minY + 30)
         if panda.position.x <= midLeft.x {
             panda.position.x = midLeft.x
+            panda.run(SKAction.repeatForever(pandaMove))
         velocity.x = abs(velocity.x)
       }
         if panda.position.x >= midRight.x {
             panda.position.x = midRight.x
+            panda.run(SKAction.repeatForever(pandaMoveback))
         velocity.x = -velocity.x
       }
       if panda.position.x <= bottomLeft.x {
@@ -378,7 +380,7 @@ livesLabel.text = "Lives: \(lives)"
         timePerFrame: 0.1)
         
         pandaMove = SKAction.moveBy(x: 200 + panda.size.width, y: 0, duration: 1.5)
-        pandaMoveback = SKAction.moveBy(x: 200 + panda.size.width, y: 0, duration: 1.5)
+        pandaMoveback = SKAction.moveBy(x: -(200 + panda.size.width), y: 0, duration: 1.5)
       super.init(size: size)
     }
 
