@@ -18,3 +18,57 @@ Please Run the game in Landscape Mode on iPad Pro (12.9-inch)(4th Generation) si
 - Detects when game is over & YOU LOSE screen is shown
 - Detect when the player wins & YOU WIN screen.
 - Plays Background sound, hit enemy sound, win or lose game sound , jump sound
+
+# Screenshots:
+<br>
+<img
+src="Screenshots/gameplay.gif"
+raw=true
+width="50%"
+height = "40%"
+/> 
+<br>
+<br>
+
+<img
+src="Screenshots/1.png"
+raw=true
+width="20%"
+height = "10%"
+/> 
+<img
+src="Screenshots/2.png"
+raw=true
+width="20%"
+height = "10%"
+/> 
+<img
+src="Screenshots/3.png"
+raw=true
+width="20%"
+height = "10%"
+/> 
+<img
+src="Screenshots/4.png"
+raw=true
+width="20%"
+height = "10%"
+/> 
+<img
+src="Screenshots/5.png"
+raw=true
+width="20%"
+height = "10%"
+/> 
+<img
+src="Screenshots/YouLose.png"
+raw=true
+width="20%"
+height = "10%"
+/> 
+<img
+src="Screenshots/YouWin.png"
+raw=true
+width="20%"
+height = "10%"
+/> 
